@@ -1,13 +1,14 @@
 /**
- * A card representation to be used in tabletop games, similar to those found in a Standard USPCC Bicycle Deck of cards.
+ * A representation of a card to be used in various tabletop games, similar to those found in a
+ * Standard USPCC Bicycle Deck of cards.
  * @author jaspersn
- * @version 1.0
+ * @version 1.1
  */
 public class Card {
     /**
      * The value of the {@link Card}.
      */
-    private final char value;
+    private final Value value;
     /**
      * The suit/symbol of the {@link Card}.
      */
@@ -17,7 +18,7 @@ public class Card {
      * @param value the value to be associate with the card
      * @param suit the symbol to be associated with the card
      */
-    public Card(char value, char suit) {
+    public Card(Value value, char suit) {
         this.value = value;
         this.suit = suit;
     }
@@ -25,7 +26,7 @@ public class Card {
      * Returns the {@link Card#value} of the card.
      * @return the {@link Card#value} of the card.
      */
-    public char getValue() {
+    public Value getValue() {
         return value;
     }
     /**
@@ -39,11 +40,11 @@ public class Card {
     @Override
     public String toString() {
         String s = "+-----+\n";
-        s += "|" + value + "    |\n";
+        s += "|" + value.getSymbol() + "    |\n";
         s += "|" + suit + "    |\n";
         //s += "|     |\n";
         s += "|    " + suit + "|\n";
-        s += "|    " + value + "|\n";
+        s += "|    " + value.getSymbol() + "|\n";
         s += "+-----+\n";
         return s;
     }
