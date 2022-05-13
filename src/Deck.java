@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * A Deck of {@link Card} objects, used to implement tabletop card games in Java.
  * @author jaspersn
- * @version 1.1
+ * @version 1.1.1
  */
 public class Deck {
     /**
@@ -85,11 +85,29 @@ public class Deck {
         deck.add(card);
     }
     /**
+     * Adds a {@link Deck} to the bottom of the current {@link Deck}.
+     * @param deck The {@link Card} to be added.
+     */
+    public void add(Deck deck) {
+        for(Card c : deck.deck) {
+            add(c);
+        }
+    }
+    /**
      * Removes and returns the {@link Card} on the top of the current {@link Deck}.
      * @return the {@link Card} on the top of the current {@link Deck}
      * @throws DeckException if attempting to remove a {@link Card} from an empty {@link Deck}.
      */
     public Card removeTop() {
+        if (size() == 0) throw new DeckException("Attempted to remove card from an empty deck.");
+        return deck.removeLast();
+    }
+    /**
+     * Removes and returns the {@link Card} on the bottom of the current {@link Deck}.
+     * @return the {@link Card} on the bottom of the current {@link Deck}
+     * @throws DeckException if attempting to remove a {@link Card} from an empty {@link Deck}.
+     */
+    public Card removeBottom() {
         if (size() == 0) throw new DeckException("Attempted to remove card from an empty deck.");
         return deck.removeFirst();
     }
@@ -107,6 +125,14 @@ public class Deck {
             s += c.toString();
         }
         return s;
+    }
+
+    /**
+     * Returns whether the current {@link Deck} has any cards in it.
+     * @return whether the current {@link Deck} has any cards in it.
+     */
+    public boolean isEmpty() {
+        return size() == 0;
     }
 }
 
@@ -135,55 +161,55 @@ enum Value {
     /**
      * Ace
      */
-    ACE('A', 1),
+    ACE('A', 13),
     /**
      * Two
      */
-    TWO('2', 2),
+    TWO('2', 1),
     /**
      * Three
      */
-    THREE('3', 3),
+    THREE('3', 2),
     /**
      * Four
      */
-    FOUR('4', 4),
+    FOUR('4', 3),
     /**
      * Five
      */
-    FIVE('5', 5),
+    FIVE('5', 4),
     /**
      * Six
      */
-    SIX('6', 6),
+    SIX('6', 5),
     /**
      * Seven
      */
-    SEVEN('7', 7),
+    SEVEN('7', 6),
     /**
      * Eight
      */
-    EIGHT('8', 8),
+    EIGHT('8', 7),
     /**
      * Nine
      */
-    NINE('9', 9),
+    NINE('9', 8),
     /**
      * Ten
      */
-    TEN('X', 10),
+    TEN('X', 9),
     /**
      * Jack
      */
-    JACK('J', 11),
+    JACK('J', 10),
     /**
      * Queen
      */
-    QUEEN('Q', 12),
+    QUEEN('Q', 11),
     /**
      * King
      */
-    KING('K', 13);
+    KING('K', 12);
     /**
      * The {@code int value} of the card value.
      */
